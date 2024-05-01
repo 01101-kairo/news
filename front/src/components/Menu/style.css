@@ -1,0 +1,35 @@
+.menu{
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  background-color: white;
+  color: red;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.menu button{
+  background: transparent;
+  color: red;
+  border: none;
+  cursor: pointer;
+}
+
+.menu_lateral {
+  height: 100vh;
+  width: 220px;
+  background-color: white;
+  color: red;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.menu_lateral button{
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+  background: transparent;
+  color: red;
+  border: none;
+}
