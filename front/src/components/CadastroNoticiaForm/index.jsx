@@ -1,15 +1,30 @@
 'use client'
+import axios from 'axios'
 import { useState } from 'react';
 
 export default function CadastroNoticiaForm() {
   const [titulo, setTitulo] = useState('');
   const [img, setImg] = useState('');
   const [texto, setTexto] = useState('');
+  const [categoria, setCategoria] = useState('');
 
-  const aoSubmeter = (e) => {
+  const aoSubmeter = async (e) => {
     e.preventDefault(); // Evita o comportamento padrão de submit do formulário
-    console.log('submeteu', titulo, img, texto);
-  };
+    try {
+      const formulario = {
+        titulo,
+        img,
+        texto,
+        categoria
+      }
+      const result = await axios.post('http://localhost:8000/noticias',formulario)
+      alert('Noticia criada com sucesso') // Exibe a mensagem de resposta do servidor
+      return router.push('/home')
+
+    } catch (error) {
+      alert(error.response.data.message) //Exibe a mensagem de erro do servidor
+    }
+  }
 
   const aoAlterarValores = (e) => {
     const { name, value } = e.target;
@@ -23,10 +38,13 @@ export default function CadastroNoticiaForm() {
       case 'texto':
         setTexto(value);
         break;
+      case 'categoria':
+        setCategoria(value);
+        break;
       default:
         break;
     }
-  };
+  }
 
   return (
     <form onSubmit={aoSubmeter}>
@@ -39,10 +57,23 @@ export default function CadastroNoticiaForm() {
         <label htmlFor="img">Imagem</label>
         <input type="text" name="img" onChange={aoAlterarValores} />
       </div>
+
       <div>
         <label htmlFor="texto">Texto</label>
         <textarea type="text" name="texto" onChange={aoAlterarValores} />
       </div>
+
+      <div>
+        <label htmlFor="categoria">categoria</label>
+        <select name="categoria" onChange={aoAlterarValores}>
+          <option value="">--Please choose an option--</option>
+          <option value="produto">produto</option>
+          <option value="tecnologia">tecnologia</option>
+          <option value="rh">RH</option>
+          <option value="vendas">vendas</option>
+        </select>
+      </div>
+
       <button type="submit">Criar noticia</button>
     </form>
   );

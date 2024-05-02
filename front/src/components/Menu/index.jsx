@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from "next/link";
 import './style.css'
 
 export default function Menu() {
@@ -19,9 +20,11 @@ export default function Menu() {
             <b>x</b>
           </button>
           <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
+            <li><Link href="/home">home</Link></li>
+            <li><Link href="/noticias/produtos">Produto</Link></li>
+            <li><Link href="/noticias/tecnologia">Tecnologia</Link></li>
+            <li><Link href="/noticias/rh">RH</Link></li>
+            <li><Link href="/noticias/vendas">Vendas</Link></li>
           </ul>
         </nav>
       }

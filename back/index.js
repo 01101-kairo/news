@@ -1,11 +1,15 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
+
+
 const usuarioModel = require('./src/modules/usuario/usuario.model')
 const noticiaModel = require('./src/modules/noticia/noticia.model')
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 
 
@@ -40,7 +44,7 @@ app.post('/login', async (req, res)=>{
     return res.status(400).json({message: 'E-mail ou senha incorreto'})
   }
   const token = jwt.sign({_id: usuarioExistente._id}, 'dnc')
-  return res.status(400).json({
+  return res.status(200).json({
     message: 'login realizado com sucesso',
     token,
   })
@@ -83,7 +87,7 @@ app.post('/usuarios', async (req, res)=>{
     email: req.body.email,
     senha: senhaCriptografada,
   })
-  return res.status(201).jason(usuario)
+  return res.status(201).json(usuario)
 })
 
 

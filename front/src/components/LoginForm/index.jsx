@@ -1,15 +1,25 @@
 'use client'
+import axios from 'axios'
+import { useRouter  } from "next/navigation";
 import { useState  } from "react";
 
+
 export default function LoginForm() {
+  const router = useRouter()
   const [formulario, setFormulario] = useState({
     email: '',
     senha: ''
   })
 
-  const aoSubmeter = (e) => {
+  const aoSubmeter = async (e) => {
     e.preventDefault()
-    console.log('submetido', formulario)
+    try {
+      const result = await axios.post('http://localhost:8000/login', formulario)
+      console.log(result.data.message) // Exibe a mensagem de resposta do servidor
+      router.push('/admin/noticia/criar')
+    } catch (error) {
+      alert(error.response.data.message) //Exibe a mensagem de erro do servidor
+    }
   }
   const aoAlternarValores = (e) => {
     const {name, value} = e.target
