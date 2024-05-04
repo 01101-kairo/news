@@ -1,6 +1,9 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaWindowClose, FaCoffee  } from "react-icons/fa";
+
 import Link from "next/link";
 import './style.css'
 
@@ -10,14 +13,14 @@ export default function Menu() {
   return (
     <>
       <nav className='menu'>
-        <button onClick={()=> setMenuLateral(!menuLateral)}>Menu</button>
-        <div>Logo</div>
+        <button onClick={()=> setMenuLateral(!menuLateral)}><GiHamburgerMenu size='30px' /></button>
+        <div className='logo'> <FaCoffee size='30px' />  <p>the news</p> </div>
         <button onClick={()=> router.push('/login')}>Login</button>
       </nav>
       { menuLateral &&
         <nav className='menu_lateral'>
           <button onClick={()=> setMenuLateral(!menuLateral)}>
-            <b>x</b>
+            <b><FaWindowClose size='20px' /></b>
           </button>
           <ul>
             <li><Link href="/home">home</Link></li>

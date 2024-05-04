@@ -1,0 +1,4 @@
+.grid-noticia {
+  display: flex;
+  flex-wrap: wrap;
+}
