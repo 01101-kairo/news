@@ -47,6 +47,7 @@
   background-color: white;
   color: #333;
   position: fixed;
+  z-index:999;
   top: 0;
   left: 0;
 }

@@ -29,3 +29,21 @@
 .card-noticia time{
   padding: 10px 10px 30px 10px;
 }
+
+.card-noticia .houver{
+  position: absolute;
+  color:  rgb(var(--foreground-rgb));
+  font-size: 30px;
+  font-weight: bolder;
+  background-color: #FCCD07D6;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  z-index:1;
+  transition: all 0.3s ease-in-out;
+}
