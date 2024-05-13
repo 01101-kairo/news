@@ -8,7 +8,6 @@ import "./style.css"
 
 export default function HomePage() {
   const [noticias, setNoticias] = useState([])
-  const [ultimasNoticias, setUltimasNoticias] = useState([])
 
   const getNoticias = async () => {
     try {
@@ -26,14 +25,8 @@ export default function HomePage() {
   }
 
   const getUltimasNoticias = () => {
-    try {
-      // Ordenar as notícias pelo campo de data em ordem decrescente
-      const noticiasOrdenadas = noticias.sort((a, b) => new Date(b.data) - new Date(a.data));
-      // Limitar o resultado a 3 notícias
-      const ultimasNoticias = noticiasOrdenadas.slice(0, 3);
-      setUltimasNoticias(ultimasNoticias);
-    } catch (error) {
-      console.error("Erro ao buscar as últimas notícias:", error);
+    if (noticias) {
+      return noticias.filter(noticia => noticia.ultimasNoticias)
     }
   }
 
@@ -41,27 +34,20 @@ export default function HomePage() {
     getNoticias()
   }, [])
 
-  useEffect(()=> {
-    if (noticias.length > 0) {
-      getUltimasNoticias()
-    }
-  }, [noticias])
-
-
   return (
     <div className="container row">
 
-      <div className="col-xl-3">
-        { getNoticiaMaisPopular() && <LateralEsquerda noticia={getNoticiaMaisPopular()}/>
-        }
+      <div className="col-xl-3"> {
+        getNoticiaMaisPopular() && <LateralEsquerda noticia={getNoticiaMaisPopular()}/>
+      }
       </div>
       <div className="news col-xl-6 col-12">
         {noticias.map(noticia =>
           <Noticia key={noticia.id} noticia={noticia}/>
         )}
       </div>
-      <div className="col-xl-3">{
-        noticias[0] && <LateralDireita noticias={ultimasNoticias}/>
+      <div className="col-xl-3"> {
+        getUltimasNoticias() && <LateralDireita noticias={getUltimasNoticias()}/>
       }
       </div>
     </div>

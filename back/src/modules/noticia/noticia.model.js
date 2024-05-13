@@ -6,7 +6,8 @@ const usuarioSchema = new Schema({
   img: String,
   texto: String,
   categoria: String,
-},{timestamps: true}
+},
+  {timestamps: true}
 )
 
 const NoticiaModel = mongoose.model('noticias', usuarioSchema);
